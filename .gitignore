@@ -1,0 +1,18 @@
+*.js
+!jest.config.js
+*.d.ts
+node_modules
+
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# App testing related stuff
+bin
+
+# Dependencies Lock
+package-lock.json
+cdk.json
+bin
+.DS_Store
