@@ -67,7 +67,7 @@ export class AwsApigatewayS3 extends Construct {
           statusCode: "500",
         }
       ]
-      // requestParameters:[]
+      
     }
     let awsS3IntegrationFolderGetProps = new api.AwsIntegration({
       service: 's3',
@@ -219,8 +219,6 @@ export class AwsApigatewayS3 extends Construct {
     })
     let apiGatewayResourceItemHead = this.apiGatewayResourceItem.addMethod("HEAD",awsS3IntegrationFolderItemHeadProps,methodOptionFolderItemHeadProps)
     // Expose HEAD on a Folder/Item resource to get object metadata in an Amazon S3 bucket. (/folder/item {Head}) --End
-
-    // let allS3BucketsToAdd = [localS3Bucket.bucketArn, `${localS3Bucket.bucketArn}/*`]
 
     // Adding minimum permission to the APIGW execution role
     this.apiGatewayRole.addToPolicy(new iam.PolicyStatement({
@@ -403,10 +401,7 @@ export class AwsApigatewayS3 extends Construct {
     // This structure is always required:
     this.apiGatewayResourceFolder = localApiGateway.root.addResource('{folder}')
     this.apiGatewayResourceItem = this.apiGatewayResourceFolder.addResource('{item}')
-    // console.log(`allowCreateOperation --${props.allowCreateOperation}`)
-    // console.log(`allowReadOperation --${props.allowReadOperation}`)
-    // console.log(`allowDeleteOperation --${props.allowDeleteOperation}`)
-
+    
     if (props.allowReadOperation!== undefined?props.allowReadOperation:true) {
       // console.log("inside read")
       this.addReadOperationConfiguration(localApiGateway, localS3Bucket, props.additionalBuckets!== undefined?props.additionalBuckets:[])
